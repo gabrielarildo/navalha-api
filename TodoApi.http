@@ -1,0 +1,90 @@
+@NavalhaApi_HostAddress = http://localhost:5089
+
+### Registrar usuário (Admin)
+POST {{NavalhaApi_HostAddress}}/api/auth/register
+Content-Type: application/json
+
+{
+  "nome": "Admin Navalha",
+  "email": "admin@navalha.com",
+  "senha": "navalha123",
+  "role": "Admin"
+}
+
+###
+
+### Login
+POST {{NavalhaApi_HostAddress}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "admin@navalha.com",
+  "senha": "navalha123"
+}
+
+###
+
+### Listar serviços (Corte Masculino, Barba, Degradê, etc.)
+GET {{NavalhaApi_HostAddress}}/api/servicos
+Accept: application/json
+
+###
+
+### Criar barbeiro
+POST {{NavalhaApi_HostAddress}}/api/barbeiros
+Content-Type: application/json
+
+{
+  "nome": "Carlos Souza",
+  "telefone": "(14) 99999-1111",
+  "especialidade": "Degradê e Barba"
+}
+
+###
+
+### Criar cliente
+POST {{NavalhaApi_HostAddress}}/api/clientes
+Content-Type: application/json
+
+{
+  "nome": "João Pereira",
+  "telefone": "(14) 98888-2222",
+  "email": "joao@email.com"
+}
+
+###
+
+### Consultar horários disponíveis de um barbeiro em uma data
+GET {{NavalhaApi_HostAddress}}/api/barbeiros/{{barbeiroId}}/horarios-disponiveis?data=2026-06-25
+Accept: application/json
+
+###
+
+### Criar agendamento (Corte + Barba)
+POST {{NavalhaApi_HostAddress}}/api/agendamentos
+Content-Type: application/json
+
+{
+  "clienteId": "{{clienteId}}",
+  "barbeiroId": "{{barbeiroId}}",
+  "servicoId": "{{servicoId}}",
+  "dataHora": "2026-06-25T14:00:00",
+  "observacoes": "Cliente prefere corte mais curto nas laterais."
+}
+
+###
+
+### Confirmar agendamento
+PATCH {{NavalhaApi_HostAddress}}/api/agendamentos/{{agendamentoId}}/status
+Content-Type: application/json
+
+{
+  "status": "Confirmado"
+}
+
+###
+
+### Cancelar agendamento
+PATCH {{NavalhaApi_HostAddress}}/api/agendamentos/{{agendamentoId}}/cancelar
+
+###
